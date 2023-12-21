@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>刷题网站</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+
+  <div class="container mt-5">
+    <h1>刷题网站</h1>
+    <div id="questions-container"></div>
+    <button class="btn btn-primary" onclick="submitAnswers()">提交答案</button>
+    <div id="result-container" class="mt-3"></div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <!-- <script src="script.js"></script> -->
+<script>
+    const questions = [
+  {
+    question: "这是第一道题目吗？",
+    options: ["是的", "不是"],
+    correctAnswer: "是的",
+    explanation: "这是第一道题目。",
+  },
+  {
+    question: "2 + 2 = ?",
+    options: ["3", "4", "5"],
+    correctAnswer: "4",
+    explanation: "2 + 2 等于 4。",
+  },
+  // 添加更多题目...
+];
+
+function renderQuestions() {
+  const questionsContainer = $("#questions-container");
+  questions.forEach((q, index) => {
+    const questionHtml = `
+      <div class="card mt-3">
+        <div class="card-body">
+          <h5 class="card-title">${index + 1}. ${q.question}</h5>
+          <form id="form-${index}">
+            ${q.options.map((opt, optIndex) => `
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="question-${index}" id="option-${index}-${optIndex}" value="${opt}">
+                <label class="form-check-label" for="option-${index}-${optIndex}">
+                  ${opt}
+                </label>
+              </div>
+            `).join('')}
+          </form>
+          <div id="explanation-${index}" class="mt-2" style="display: none;"></div>
+        </div>
+      </div>
+    `;
+    questionsContainer.append(questionHtml);
+  });
+}
+
+function submitAnswers() {
+  let correctCount = 0;
+  questions.forEach((q, index) => {
+    const selectedOption = $(`input[name='question-${index}']:checked`).val();
+    const explanationContainer = $(`#explanation-${index}`);
+
+    if (selectedOption === q.correctAnswer) {
+      correctCount++;
+      explanationContainer.html(`<p class="text-success">回答正确！</p><p>${q.explanation}</p>`);
+    } else {
+      explanationContainer.html(`<p class="text-danger">回答错误。</p><p>${q.explanation}</p>`);
+    }
+
+    explanationContainer.show();
+  });
+
+  const resultContainer = $("#result-container");
+  resultContainer.html(`<h4>你的得分：${correctCount} / ${questions.length}</h4>`);
+}
+
+$(document).ready(function() {
+  renderQuestions();
+});
+
+</script>
+</body>
+</html>
