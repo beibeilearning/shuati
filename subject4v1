@@ -7,361 +7,94 @@
 
     版本：1.0.0.1
  -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>刷题网站</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-</head>
-<body>
-
-  <div class="container mt-5" id="app-container"></div>
-  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.5.0/css/bootstrap.min.css">
-  <script src="https://cdn.bootcss.com/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdn.bootcss.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-
-  
-</body>
-<script>
-
-    // script.js
-// 单题刷题
-const questions = [
-//   {
-//     question: "这是第一道题目吗？",
-//     image: "url_to_image1.jpg",
-//     options: ["是的", "不是"],
-//     correctAnswer: 0,
-//     explanation: "这是第一道题目。",
-//   },
-  {
-    question: "开发者做这个页面比较匆忙,可能会出现题目和答案不符的地方;原题库也可能会提供错误答案,请谅解。后面也加了一些开发者的题目解析和知识点汇总（画饼）。",
-    image: "url_to_image2.jpg",
-    options: ["好的","别选这个","来源1： https://onebox.huawei.com/v/968c03905e78a00c12b550ef93752f17?type=0"],
-    correctAnswer: 0,
-    explanation: "科目四必过。感谢分享资源的好心路人们。By the way, 这个程序没有bug， 只有feature。",
-  },
-  // 添加更多题目...
-  {
-          question: "系统要求业务支持4000条/s的入库能力，实际应用中发现业务数据入库速率达到4000条/s,数据积压，服务重启，通过以下哪种方法发现该问题",
-          options: ["性能测试覆盖", "压力测试覆盖", "长时间测试覆盖", "边界值设计"],
-          explaination: "",
-          correctAnswer: 0,
-    
-
-        },
-        {
-          question: "敏捷及服务化交付模式下的关键测试设计活动在哪个阶段开展",
-          options: ["计划阶段", "开发阶段", "验证阶段", "概念阶段"],
-          explaination: "",
-          correctAnswer: 1
-        },
-        {
-          question: "针对测试设计维护工作，如下说法正确的是",
-          options: ["测试设计维护活动只需要在测试设计完成后才会开展", "测试方案基线化后就不需要变更了", "测试设计维护只需要聚集测试用例即可", "测试设计维护工作贯穿于测试活动各个阶段"],
-          explaination: "",
-          correctAnswer: 3
-        },
-        {
-          question: "某特性需要考虑三种类型输入A/B/C，A可能有2个取值，B可能有2个取值，C可能有4个取值，若采用数据组合测试设计技术，要满足BC组合覆盖，则A/B/C三个测试输入取值的数据组合个数是",
-          options: ["4", "5", "6", "7"],
-          explaination: "",
-          correctAnswer: 2
-        },
-        {
-          question: "在数据组合测试设计技术中，最常用的覆盖技术是",
-          options: ["BC。因为BC覆盖发现缺陷的效率最高", "EC，因为EC生成的测试用例最有效", "全组合，因为全组合测试覆盖后被测对象质量风险最小", "Pair-wise组合，因为pair-wise组合发现75%的潜在风险"],
-          explaination: "",
-          correctAnswer: 3
-        },
-       
-        {
-          question: "(存疑)混合条件为IF((A > 4 OR B > 5) AND C < 3) THEN (D=A+B-C),关于判定点测试设计技术，满足条件覆盖的取值",
-          options: ["A=7 B=3 C=2;A=6 B =4 C=3", "A=3 B=3 C=2;A=7 B=4 C=3", "A=3 B=3 C=2;A=7 B=6 C=3", "A=3 B=3 C=1;A=7 B=6 C=2"],
-          explaination: "",
-          correctAnswer: 2
-        },
-       
-        {
-          question: "判定点测试设计技术各种覆盖方式，以下说法正确的是",
-          options: ["某测试用例集满足判定覆盖要求是，不会同时满足条件覆盖", "某测试用例集满足条件覆盖要求时，不会同时满足判定覆盖", "某测试用例集满足判定、条件覆盖时，其测试覆盖比条件覆盖更好", "满足判定、条件覆盖的用例集中测试用例数量比满足条件覆盖的测试用例更多"],
-          explaination: "",
-          correctAnswer: 2
-        },
-       
-      
-        {
-          question: "分析师采用波士顿排序法对一个外卖APP进行需求价值排序，以下哪个最有可能是明星需求",
-          options: ["用户中心管理", "支持邮箱登录注册", "送餐时间计时", "在线支付功能"],
-          explaination: "在线支付功能",
-          correctAnswer: 3
-        },
-        {
-          question: "测试设计覆盖评估中的要素说法不正确的是",
-          options: ["测试分析中，设计规格覆盖对设计文档中所有明确的规格有覆盖，则规格覆盖完整", "对于设计规格中没有测试手段的，需要提出相应的验证方法和可测试性需求", "通过对测试类型评估，可以发现测试需求中的问题", "测试设计中需要明确哪些测试规格是要点，需要重点规格需要设更多的测试用例覆盖"],
-          explaination: "",
-          correctAnswer: 0
-        },
-        //  {
-        //   question: "小李正在做A特性测测试分析，他在部门培训材料中找到很多工程方法，以下不适用测试分析的工程方法是【测试分析PPT中】",
-        //   options: ["", "", "", ""],
-        //   explaination: "",
-        //   correctAnswer: 0
-        // },
-
-        // 来源： https://onebox.huawei.com/v/d08c2374ca38822fc001b83bfdd1eced?type=0
-        {
-          question: "以下是从Klee的题库找的题，上个题库太难学不会不看了",
-          options: ["已阅", "别选这个"],
-          explaination: "来源： https://onebox.huawei.com/v/d08c2374ca38822fc001b83bfdd1eced?type=0 感谢你好心人",
-          correctAnswer: 0
-        },
-        {
-          question: "某产品在现网上运行时，经常出现因记录大量日志导致存储器空间不足的问题，可以使用如下哪种可测试性框架来改进这些问题？",
-          options: ["仿真测试框架", "逆向分析框架", "测试代理框架", "函数容器框架"],
-          explaination: "",
-          correctAnswer: 2
-        },
-       
-        {
-          question: "某测试人员基于测试模式库开展测试设计，如下描述不正确的是",
-          options: ["产品测试模式库要能够被产品测试用例100%覆盖", "为了便于度量，不建议多个测试模式对应同一个用例", "做好测试用例与测试模式的关联，方便度量测试模式的覆盖率", "需开展测试模式与特性交互分析"],
-          explaination: "",
-          correctAnswer: 1
-        },
-        {
-          question: "版本测试策略制定时，针对不同的测试模型选择不同的测试设计技术，如下关于测试技术的选择描述正确的是",
-          options: ["特性测试模型为流程模型，选择数据组合和处理周期的测试设计技术", "特性测试模型为黑盒模型（多输入组合模型），选择处理周期和分类树的测试设计技术", "特性测试模型为流程模型，选择判定表和状态转换的测试设计技术", "特性测试模型为黑盒模型（多输入组合模型），选择判定表和分类树的测试设计技术"],
-          explaination: "",
-          correctAnswer: 3
-        },
-        {
-          question: "下列关于价值评估正确的是",
-          options: ["价值评估主要评估立项时预期要解决的客户问题是否能够达成预期", "价值评估主要用于预测产品在现网的表现，能否达到预期的收益", "价值评估是基于现网场景做价值验收，客户不能直观感受到的系统增益不属于价值评估", "对于版本的增强特性，只评估新增部分的价值即可"],
-          explaination: "",
-          correctAnswer: 0
-        },
-        {
-          question: "下列关于价值评估正确的是",
-          options: ["价值评估主要评估立项时预期要解决的客户问题是否能够达成预期", "价值评估主要用于预测产品在现网的表现，能否达到预期的收益", "价值评估是基于现网场景做价值验收，客户不能直观感受到的系统增益不属于价值评估", "对于版本的增强特性，只评估新增部分的价值即可"],
-          explaination: "万事一开始就要立规矩 “立项时",
-          correctAnswer: 0
-        },
-        {
-          question: "在对版本出口时会进行缺陷分析，基于版本/特性的缺陷分布、分类统计以及缺陷走势对版本/特性的质量进行评估。以下哪项适用于缺陷趋势分析",
-          options: ["ODC方法", "四象限", "Gompertz", "缺陷密度"],
-          explaination: "",
-          correctAnswer: 2
-        },
-        {
-          question: "测试日志文件被加读写锁后的日志查看功能，如下哪种可测试性框架最适用于构造日志文件加锁？",
-          options: ["测试代理框架", "逆向分析框架", "函数容器框架", "仿真测试框架"],
-          explaination: "",
-          correctAnswer: 0
-        },
-        {
-          question: "某业务逻辑流程图如下: 当路径覆盖深度N=2时，能够识别出多少个测试条件",
-          options: ["5", "8", "6", "7"],
-          explaination: "别问图在哪儿，问就是这部分代码没写",
-          correctAnswer: 2
-        },
-        {
-          question: "某模拟耳机系统有3个输入，取值分别为：模式（降噪，环境声），音量（小，中，大），操作（上一首，播放，下一首），使用pair-wise的组合测试覆盖，所需测试用例数至少为",
-          options: ["9", "18", "3", "6"],
-          explaination: "测试用例数是最大两个因子数量乘机3*3 = 9，  9个耳机",
-          correctAnswer: 0
-        },
-        {
-          question: "某模拟空调系统有3个输入，取值分别为: 模式 （制热，制冷，换气) ，风速 (小，中，大) ，风向 (上，中，下，循环) ，使用基本选择组合测试覆盖技术，用例数",
-          options: ["4", "3", "8", "36"],
-          explaination: "",
-          correctAnswer: 2
-        },
-        {
-          question: "下列针对进程间消息收发处理模块的可测试性需求，哪个不是使用IBO（Input-Boundary-Output）模型分析法得到的",
-          options: ["提供手段构造收到进程ID错误的消息", "提供手段构造消息队列满", "提供手段解析接收到和发送出去的消息内部数据内容", "提供手段勘察消息队列中的等待处理消息"],
-          explaination: "",
-          correctAnswer: 1
-        },
-        {
-          question: "以下针对测试覆盖深度和测试覆盖技术的相关描述，不正确的是 （这题库给的答案和解释看着怪怪的）",
-          options: ["深度越深意味着去除了更多与被测对象相关的风险", "更高的测试深度与测试覆盖对测试对象不一定意味着提供更多的测试用例", "深度越深能够发现特定测试对象更多的缺陷", "深度越深，可针对特定的被测对象的质量建立更多的信心"],
-          explaination: "越高意味着风险越大，存在不确定性。越高越不一定",
-          correctAnswer: 1
-        },
-        {
-          question: "产品商用评估模型中的评估对象包括测试过程评估和结果评估，以下不属于结果评估的对象是",
-          options: ["系统级DFx", "产品价值", "全量特性/场景/解决方案", "缺陷密度"],
-          explaination: "",
-          correctAnswer: 0
-        },
-        {
-          question: "测试环境是测试的工作基础，测试人员要进行环境模型设计，以下说法错误的是",
-          options: ["测试环境模型具有严格数据结构要求，方便支撑可视化编辑和呈现，便于人的理解", "测试环境模型要方便实现精准环境匹配、动态环境搭建", "CT领域解决方案和硬件测试对象的范围不一致，逻辑环境最好使用大环境嵌套小环境以简化描述", "环境的共建共享只有在大规模实验室中才能发挥作用，大规模应用测试模型必须稳定简单"],
-          explaination: "",
-          correctAnswer: 2
-        },
-        {
-          question: "下列哪个度量指标不能用于评估测试设计完整性",
-          options: ["被测对象的测试类型覆盖率", "TR5问题拦截率", "每千行用例密度", "DFx用例占比"],
-          explaination: "技术评审TR（Technical Review） TR5：对产品整体的设计稳定性和技术成熟度的评估，以便于设计定型。TR5在DVT（DVT(Design Verification Test)设计验证测试阶段）结束后进行，检查设计样机的制造过程是否影响产品的功能、性能、一致性和可靠性等；评估产品通过试制过程是否完全符合预定的功能和性能要求，满足前期确定的产品需求规格，并且在功能和性能方面的问题均已被发现和解决。完成TR5就表明试产验证和受控销售已经准备就绪。",
-          correctAnswer: 1
-        },
-        {
-          question: "关于版本TR6的测试评估工作，如下处理方式不正确的是",
-          options: ["重点识别产品商用存在的关键风险和差距，测试评估结果将作为版本发布决策建议。", "评估本阶段交付的质量目标是否达成，评估结果作为进入下阶段工作的重要决策输入。", "评估对象应包括特性需求、特性专项（质量属性）、产品级系统专项（按既定测试策略确定的专项内容）。", "要重点识别试验局或小批量发货存在的风险。"],
-          explaination: "要重点识别试验局或小批量发货存在的风险。 ---TR5的识别   TR6已经开始正式发货了。小批量是TR5",
-          correctAnswer: 3
-        },
-        {
-          question: "“当1000人同时通过手机参加视频会议场景，接入用户超过极限，会出现进程挂死，导致用户概率性视频会议接入失败”；关于这段风险评估描述，如下理解错误的是",
-          options: ["导致用户概率性视频会议接入失败”描述了问题的影响范围", "当1000人同时通过手机参加视频会议场景”描述了问题的失效条件", "“接入用户超过极限，会出现进程挂死”描述了问题的根因分析", "“接入用户超过极限，会出现进程挂死”描述了问题的失效模式"],
-          explaination: "",
-          correctAnswer: 2
-        },
-        {
-          question: "给出用例，判断覆盖类型",
-          options: ["测试用例组合仅满足条件覆盖", "测试用例组合既不满足判定覆盖也不满足条件覆盖", "测试用例组合仅满足判定覆盖", "测试用例组合同时满足判定覆盖和条件覆盖"],
-          explaination: "",
-          correctAnswer: 2
-        },
-        {
-          question: "产品新建某领域知识库, TSE负责该知识库模板输出, 如下描述哪项不是知识库基本组成要素？",
-          options: ["知识库参考来源", "知识库应用方法", "知识库基本信息", "知识库目录组织"],
-          explaination: "",
-          correctAnswer: 1
-        },
-        {
-          question: "使用HTSM(Heuristic Test Strategy Model)工具制定特性测试策略时，一般分为四大步骤，关于这四个步骤的内容和要求哪个是错误的",
-          options: ["步骤2，与干系人交流，获取非需求和设计文档中的输入，从需求实现的视角，聚焦实现中存在的风险", "步骤4， 完成特性的测试覆盖策略，覆盖前面识别的风险、价值，可以指导测试方案设计开展", "步骤3，完成特性的测试策略分析，重点关注策略分析对象的全面性", "步骤1，完成项目环境整理，关注客户价值"],
-          explaination: "",
-          correctAnswer: 0
-        },
-        {
-          question: "对于“判定表测试设计技术”假设通过被测对象的分析得到4个条件项，3个结果项，则以下说法正确的是",
-          options: ["假设各条件项之间完全不存在互斥关系，则最多可以生成12个有效测试条件", "当其中两个条件为互斥关系时，即不可能同时为真或同时为假，则最多可以生成6个有效测试条件", "对被测对象进行分析，识别出的结果项的数量不可能比条件项的数量多", "假设各条件项之间完全不存在互斥关系，则最多可以生成16个有效测试条件"],
-          explaination: "",
-          correctAnswer: 3
-        },
-        {
-          question: "关于测试策略的制定，下面描述正确的是",
-          options: ["测试策略无需面面俱到，要充分分析、抓住重点", "测试策略不涉及特性测试设计中的测试用例输出、多态差异分析、自动化设计等工作", "测试策略应从技术层面分析以保证测试的完备性，而组织能力及环境限制是测试经理需要重点考虑的，不属于版本总体测试策略范围", "版本中TM、PL、TDE、TE角色负责实施测试策略"],
-          explaination: "",
-          correctAnswer: 0
-        },
-        {
-          question: "下面属于系统级安全测试策略范围，不在特性级安全测试策略中考虑的是",
-          options: ["识别版本的开源及第三方软件范围，明确开源及第三方软件的黑盒覆盖策略", "识别涉及安全性的特性，特别是版本新增需求的安全性，给出测试设计和执行策略，从而保障特性级安全属性被充分考虑和测试", "从历史质量表现、当前版本变更等方面进行影响分析制定本版本安全特性的测试设计和测试执行总体策略", "识别版本新增的安全需求（特性），给出对应的测试设计策略和测试执行策略，分析安全需求的风险级别，识别测试重点和风险点"],
-          explaination: "",
-          correctAnswer: 0
-        },
-        {
-          question: "关于自动化脚本框架要素理解错误的是",
-          options: ["每个测试用例脚本中可以包含若干个测试步骤，但必须对每个测试步骤做期望结果检查", "测试套脚本中一般会有对每个测试用例执行完后的回调操作，主要目的是用来清除上一个用例在设备环境上的残留，确保下一个用例准确运行", "自动化脚本框架中，自动化脚本一般会由测试用例和测试套组成，一个测试套包含若干个用例", "小A为了提升用例脚本执行效率，可以把若干个用例公共操作(如初始化网元设备)放到测试套中来运行"],
-          explaination: "",
-          correctAnswer: 0
-        },
-        {
-          question: "针对判定点: ( ( C1or C2) and ( C3 and C4) ) ，要求满足选择条件/判定覆盖，最少需要几个测试条件?",
-          options: ["4", "8", "5", "6"],
-          explaination: "选择N+1",
-          correctAnswer: 2
-        },
-        {
-          question: "某空调控制系统主要功能的状态机模型如图所示，为达成1-Switch测试覆盖，能够识别出的测试条件个数为",
-          options: ["7", "5", "6", "8"],
-          explaination: "题库也没给图",
-          correctAnswer: 3
-        },
-        {
-          question: "测试某寄存器擦写1万次寿命的限制，如下哪个可测试性手段不适用于此测试场景？",
-          options: ["模拟多个同时擦写寄存器", "清除计数器擦写次数", "设置当前寄存器已进行9999次擦写", "查看当前已擦写的计数"],
-          explaination: "",
-          correctAnswer: 0
-        },
-        {
-          question: "下列针对某产品驱动软件的可测试性需求, 哪项是从可控制维度分析得到的？",
-          options: ["提供代替真实硬件的仿真测试环境", "提供调试信息打印驱动接口返回值", "", ""],
-          explaination: "",
-          correctAnswer: 0
-        },
-        {
-          question: "下列针对分布式系统服务的可测试性需求，哪个不是使用FMEA (Failure Mode Effect Analysis) 分析法得到的",
-          options: ["需要提供节点间链接闪断操作接口", "需要提供远程访问接口超时失败CLI", "需要记录系统服务过程中记录进程运行故障关键日志", "需要提供系统运行时网络链接时延跳变操作命令"],
-          explaination: "",
-          correctAnswer: 2
-        },
-        {
-          question: "关于判定点测试设计技术中的判定点逻辑覆盖中的“选择判定/条件覆盖MCDC”，以下说法正确的是",
-          options: ["满足组合条件覆盖不一定满足条件覆盖", "同时满足条件覆盖、判定覆盖及MCDC覆盖则满足组合条件覆盖", "满足组合条件覆盖不一定满足判定覆盖", "组合条件覆盖相比MCDC覆盖，覆盖更加充分"],
-          explaination: "",
-          correctAnswer: 3
-        },
-        {
-          question: "分析师采用KANO模型对空调需求进行排序，以下哪个最有可能是期望型需求",
-          options: ["手机远程操控", "制冷效果", "净化空气", "节能"],
-          explaination: "",
-          correctAnswer: 3
-        },
-        {
-          question: "关于特性价值评估的实践，下列说法不正确的是",
-          options: ["JAD(Joint Agile Delivery)是一种敏捷交付模式，和客户成立全功能团队，使客户能参与到各环节，实现价值特性的快速验证", "响应客户紧急需求且含有少量新特性的版本必须开实验局，根据实验局结果评估特性价值的达成情况", "新平台版本(V版本的首个商用R版本)必须开实验局，根据实验局结果评估特性价值的达成情况", "实例化需求是一种协同方法，目标是聚焦价值需求，确保各环节对需求的一致理解"],
-          explaination: "",
-          correctAnswer: 1
-        },
-        {
-          question: "风险评估是商用评估的关键维度, 如下风险描述不完整的是",
-          options: ["升级版本后，新增功能需要所有用户手动操作后才可正常使用，导致用户体验下降", "在DPOE管理模式下，DH密钥交换以及设置读写团体名功能实现不符合标准，可能导致此功能无法通过北美认证测试", "当统计文件的缓冲区满且主机和网管时间不同步的场景下，网管解析文件出现进程挂死", "在两次容灾切换后，部分设备原有性能数据丢失，且无修复措施，导致容灾特性无法通过准入测试"],
-          explaination: "",
-          correctAnswer: 2
-        },
-        {
-          question: "系统状态迁移如图所示，在1-Switch条件下有多少条路径",
-          options: ["18", "20", "21", "19"],
-          explaination: "",
-          image: "img/img1.png",
-          correctAnswer: 1
-        },
-
-        {
-           question: "",
-           options: ["", "", "", ""],
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>刷题网站</title>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+ </head>
+ <body>
+ 
+   <div class="container mt-5" id="app-container"></div>
+   <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.5.0/css/bootstrap.min.css">
+   <script src="https://cdn.bootcss.com/jquery/3.5.1/jquery.min.js"></script>
+   <script src="https://cdn.bootcss.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+ 
+   
+ </body>
+ <script>
+ 
+     // script.js
+ // 单题刷题
+ const questions = [
+ //   {
+ //     question: "这是第一道题目吗？",
+ //     image: "url_to_image1.jpg",
+ //     options: ["是的", "不是"],
+ //     correctAnswer: 0,
+ //     explanation: "这是第一道题目。",
+ //   },
+   {
+     question: "开发者做这个页面比较匆忙,可能会出现题目和答案不符的地方;原题库也可能会提供错误答案,请谅解。后面也加了一些开发者的题目解析和知识点汇总（画饼）。",
+     image: "url_to_image2.jpg",
+     options: ["好的","别选这个","来源1： https://onebox.huawei.com/v/968c03905e78a00c12b550ef93752f17?type=0"],
+     correctAnswer: 0,
+     explanation: "科目四必过。感谢分享资源的好心路人们。By the way, 这个程序没有bug， 只有feature。",
+   },
+   // 添加更多题目...
+   {
+           question: "系统要求业务支持4000条/s的入库能力，实际应用中发现业务数据入库速率达到4000条/s,数据积压，服务重启，通过以下哪种方法发现该问题",
+           options: ["性能测试覆盖", "压力测试覆盖", "长时间测试覆盖", "边界值设计"],
            explaination: "",
-           correctAnswer: 0
+           correctAnswer: 0,
+     
+ 
          },
-];
+        
+        
+         {
+            question: "",
+            options: ["", "", "", ""],
+            explaination: "",
+            correctAnswer: 0
+          },
+ ];
+ 
+ let currentQuestionIndex = 0;
+ 
+ function renderQuestion() {
+   const currentQuestion = questions[currentQuestionIndex];
+   const appContainer = $("#app-container");
+ 
+   const questionHtml = `
+     <div class="card mt-3">
+       <img src="${currentQuestion.image}" class="card-img-top" alt="Question Image">
+       <div class="card-body">
+         <h5 class="card-title">${currentQuestionIndex + 1}. ${currentQuestion.question}</h5>
+         <form id="form-${currentQuestionIndex}">
+           ${currentQuestion.options.map((opt, optIndex) => `
+             <div class="form-check">
+               <input class="form-check-input" type="radio" name="question-${currentQuestionIndex}" id="option-${currentQuestionIndex}-${optIndex}" value="${optIndex}">
+               <label class="form-check-label" for="option-${currentQuestionIndex}-${optIndex}">
+                 ${opt}
+               </label>
+             </div>
+           `).join('')}
+         </form>
+         <button class="btn btn-primary mt-3" onclick="submitAnswer()">提交答案</button>
+         <div id="explanation-${currentQuestionIndex}" class="mt-2" style="display: none;"></div>
+       </div>
+     </div>
+   `;
+ 
+   appContainer.html(questionHtml);
+ }
+ 
+// script.js
 
-let currentQuestionIndex = 0;
-
-function renderQuestion() {
-  const currentQuestion = questions[currentQuestionIndex];
-  const appContainer = $("#app-container");
-
-  const questionHtml = `
-    <div class="card mt-3">
-      <img src="${currentQuestion.image}" class="card-img-top" alt="Question Image">
-      <div class="card-body">
-        <h5 class="card-title">${currentQuestionIndex + 1}. ${currentQuestion.question}</h5>
-        <form id="form-${currentQuestionIndex}">
-          ${currentQuestion.options.map((opt, optIndex) => `
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="question-${currentQuestionIndex}" id="option-${currentQuestionIndex}-${optIndex}" value="${optIndex}">
-              <label class="form-check-label" for="option-${currentQuestionIndex}-${optIndex}">
-                ${opt}
-              </label>
-            </div>
-          `).join('')}
-        </form>
-        <button class="btn btn-primary mt-3" onclick="submitAnswer()">提交答案</button>
-        <div id="explanation-${currentQuestionIndex}" class="mt-2" style="display: none;"></div>
-      </div>
-    </div>
-  `;
-
-  appContainer.html(questionHtml);
-}
+// ...（之前的代码）
 
 function submitAnswer() {
   const selectedOptionIndex = parseInt($(`input[name='question-${currentQuestionIndex}']:checked`).val(), 10);
@@ -376,10 +109,13 @@ function submitAnswer() {
 
   explanationContainer.show();
 
+  // 移除已有的下一题按钮
+  const appContainer = $("#app-container");
+  appContainer.find('.btn-next-question').remove();
+
   // 如果还有下一题，显示下一题按钮，否则显示总分
   if (currentQuestionIndex < questions.length - 1) {
-    const appContainer = $("#app-container");
-    const nextQuestionButton = `<button class="btn btn-primary mt-3" onclick="nextQuestion()">下一题</button>`;
+    const nextQuestionButton = `<button class="btn btn-primary mt-3 btn-next-question" onclick="nextQuestion()">下一题</button>`;
     appContainer.append(nextQuestionButton);
   } else {
     const resultContainer = `<div id="result-container" class="mt-3"><h4>你的得分：${calculateScore()} / ${questions.length}</h4></div>`;
@@ -387,27 +123,30 @@ function submitAnswer() {
   }
 }
 
-function nextQuestion() {
-  currentQuestionIndex++;
-  renderQuestion();
-}
+// ...（之后的代码）
 
-function calculateScore() {
-  let correctCount = 0;
-  questions.forEach((q, index) => {
-    const selectedOptionIndex = parseInt($(`input[name='question-${index}']:checked`).val(), 10);
-    if (selectedOptionIndex === q.correctAnswer) {
-      correctCount++;
-    }
-  });
-  return correctCount;
-}
-
-$(document).ready(function() {
-  renderQuestion();
-});
-
-</script>
-
-
-</html>
+ 
+ function nextQuestion() {
+   currentQuestionIndex++;
+   renderQuestion();
+ }
+ 
+ function calculateScore() {
+   let correctCount = 0;
+   questions.forEach((q, index) => {
+     const selectedOptionIndex = parseInt($(`input[name='question-${index}']:checked`).val(), 10);
+     if (selectedOptionIndex === q.correctAnswer) {
+       correctCount++;
+     }
+   });
+   return correctCount;
+ }
+ 
+ $(document).ready(function() {
+   renderQuestion();
+ });
+ 
+ </script>
+ 
+ 
+ </html>
