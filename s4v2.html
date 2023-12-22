@@ -1,0 +1,120 @@
+<!-- index.html -->
+
+<!-- 
+    来源1：
+    https://onebox.huawei.com/v/968c03905e78a00c12b550ef93752f17?type=0
+    来源2： 
+    https://onebox.huawei.com/v/d08c2374ca38822fc001b83bfdd1eced?type=0
+
+    版本：1.0.0.1
+ -->
+ <!DOCTYPE html>
+ <html lang="en">
+ 
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>刷题网站</title>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+ </head>
+ 
+ <body>
+ 
+   <div class="container mt-5" id="app-container"></div>
+   <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.5.0/css/bootstrap.min.css">
+   <script src="https://cdn.bootcss.com/jquery/3.5.1/jquery.min.js"></script>
+   <script src="https://cdn.bootcss.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+ 
+
+ </body>
+ 
+ <script>
+   // script.js
+   // 单题刷题
+   const questions = [
+     {
+       question: "开发者做这个页面比较匆忙，可能会出现题目和答案不符的地方;原题库也可能会提供错误答案，请谅解。后面也加了一些开发者的题目解析和知识点汇总（画饼）。",
+       image: "url_to_image2.jpg",
+       options: ["好的", "别选这个", "来源1： https://onebox.huawei.com/v/968c03905e78a00c12b550ef93752f17?type=0"],
+       correctAnswer: 0,
+       explanation: "科目四必过。感谢分享资源的好心路人们。By the way, 这个程序没有bug，只有feature。",
+     },
+     {
+       question: "系统要求业务支持4000条/s的入库能力，实际应用中发现业务数据入库速率达到4000条/s,数据积压，服务重启，通过以下哪种方法发现该问题",
+       options: ["性能测试覆盖", "压力测试覆盖", "长时间测试覆盖", "边界值设计"],
+       explanation: "",
+       correctAnswer: 0,
+     },
+     {
+       question: "这是一道新题目吗？",
+       options: ["是的", "不是"],
+       correctAnswer: 0,
+       explanation: "这是一道新题目。",
+     },
+     // 添加更多题目...
+   ];
+ 
+   let currentQuestionIndex = 0;
+ 
+   function renderAllQuestions() {
+     const appContainer = $("#app-container");
+     appContainer.empty(); // 清空容器
+ 
+     questions.forEach((q, index) => {
+       const questionHtml = `
+         <div class="card mt-3">
+           <img src="${q.image}" class="card-img-top" alt="Question Image">
+           <div class="card-body">
+             <h5 class="card-title">${index + 1}. ${q.question}</h5>
+             <form id="form-${index}">
+               ${q.options.map((opt, optIndex) => `
+                 <div class="form-check">
+                   <input class="form-check-input" type="radio" name="question-${index}" id="option-${index}-${optIndex}" value="${optIndex}" onclick="submitAnswer(${index})">
+                   <label class="form-check-label" for="option-${index}-${optIndex}">
+                     ${opt}
+                   </label>
+                 </div>
+               `).join('')}
+             </form>
+             <div id="explanation-${index}" class="mt-2" style="display: none;"></div>
+           </div>
+         </div>
+       `;
+ 
+       appContainer.append(questionHtml);
+     });
+   }
+ 
+   function submitAnswer(index) {
+     const selectedOptionIndex = parseInt($(`input[name='question-${index}']:checked`).val(), 10);
+     const currentQuestion = questions[index];
+     const explanationContainer = $(`#explanation-${index}`);
+ 
+     if (selectedOptionIndex === currentQuestion.correctAnswer) {
+       explanationContainer.html(`<p class="text-success">回答正确！</p><p>${currentQuestion.explanation}</p>`);
+     } else {
+       explanationContainer.html(`<p class="text-danger">回答错误。</p><p>${currentQuestion.explanation}</p>`);
+     }
+ 
+     explanationContainer.show();
+   }
+ 
+   function showPreviousQuestion() {
+     if (currentQuestionIndex > 0) {
+       currentQuestionIndex--;
+       renderAllQuestions();
+     }
+   }
+ 
+   function showAllQuestions() {
+     currentQuestionIndex = 0;
+     renderAllQuestions();
+   }
+ 
+   $(document).ready(function () {
+     renderAllQuestions();
+   });
+ </script>
+ 
+ </html>
+ 
